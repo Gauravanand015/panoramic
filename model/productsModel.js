@@ -8,7 +8,8 @@ const productSchema = mongoose.Schema({
     Rating:String,
     product_id:Number,
     reviews:String,
-    More:String
+    More:String,
+    userID:String
 })
 
 const ProductModel = mongoose.model("product",productSchema)
