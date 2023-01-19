@@ -1,6 +1,6 @@
 const  exp = require("express");
 const { ProductModel } = require("../model/productsModel");
-const productRoute = exp.Router()
+const productRouter = exp.Router()
 const cloud = require("cloudinary").v2
 require("dotenv").config();
 
@@ -11,7 +11,7 @@ cloud.config({
     secure: true
 });
 
-productRoute.get("/allData",async(req,res)=>{
+productRouter.get("/allData",async(req,res)=>{
     try {
         const allData = await ProductModel.find()
         res.send(allData);
@@ -21,10 +21,11 @@ productRoute.get("/allData",async(req,res)=>{
 })
 
 
-productRoute.post("/create",async(req,res)=>{
+productRouter.post("/create",async(req,res)=>{
 
     const file = req.files.img;
     const allData = await ProductModel.find()
+    // res.send(`${allData.length}`)
 
     cloud.uploader.upload(file.tempFilePath, async (err, result) => {
         try {
@@ -36,8 +37,8 @@ productRoute.post("/create",async(req,res)=>{
                     Delivery:req.body.delivery,
                     Rating:req.body.rating,
                     reviews:req.body.reviews,
-                    More:req.body.More,
-                    product_id:+(allData.length+1)
+                    More:req.body.more,
+                    product_id:+(allData.length+2)
             })
                 await data.save()
                 console.log(data)
@@ -54,7 +55,7 @@ productRoute.post("/create",async(req,res)=>{
 })
 
 
-productRoute.patch("/editnupdate/:product_id",async (req,res)=>{
+productRouter.patch("/editnupdate/:product_id",async (req,res)=>{
     const id = req.params.product_id;
     const data = req.body
     try {
@@ -66,7 +67,7 @@ productRoute.patch("/editnupdate/:product_id",async (req,res)=>{
     }
 })
 
-productRoute.delete("/delete/:product_id",async (req,res)=>{
+productRouter.delete("/delete/:product_id",async (req,res)=>{
     const id = req.params.product_id;
     try {
         const del =  await ProductModel.deleteOne({product_id:id})
@@ -78,7 +79,7 @@ productRoute.delete("/delete/:product_id",async (req,res)=>{
 })
 
 module.exports={
-    productRoute
+    productRouter
 }
 
 

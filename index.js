@@ -2,7 +2,11 @@ const  exp = require("express");
 const { connection } = require("./config/db");
 require("dotenv").config()
 const fileUpload = require("express-fileupload");
-const { productRoute } = require("./Router/productRoute");
+const { productRouter } = require("./Router/productRoute");
+const { adminRouter } = require("./Router/adminRoute");
+const { validateAdmin } = require("./middleware/adminAuthenticate");
+const { userRouter } = require("./Router/usersRoute");
+const { cartRouter } = require("./Router/cartRouter");
 const app = exp();
 
 app.use(exp.json());
@@ -11,11 +15,12 @@ app.use(fileUpload({
     useTempFiles:true
 }))
 
-app.use("/product",productRoute)
+app.use("/cart",cartRouter)
+app.use("/users",userRouter)
 
-app.use("/",(req,res)=>{
-    res.send("Get all the data for home-page")
-})
+app.use("/admin",adminRouter)
+app.use(validateAdmin)
+app.use("/product",productRouter)
 
 
 

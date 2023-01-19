@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
-const userSchema =  mongoose.Schema({
+const adminSchema = mongoose.Schema({
     name:String,
     email:String,
     pass:String,
     age:String
 })
 
-const UserModel = mongoose.model("user",userSchema)
+const AdminModel = mongoose.model("adminData",adminSchema)
 
 module.exports={
-    UserModel
+    AdminModel
 }
