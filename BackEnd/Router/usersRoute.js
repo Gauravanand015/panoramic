@@ -34,7 +34,7 @@ userRouter.post("/login_user", async(req,res)=>{
     try {
         const find = await UserModel.find({email:email})
         console.log(find)
-        if(find[0].email){
+        if(find.length>0){
             bcrypt.compare(pass, find[0].pass, (err, result)=>{
                 if(err){
                     res.send("email or password is not correct please try again")
