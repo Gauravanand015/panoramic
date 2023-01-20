@@ -1,4 +1,5 @@
 const  exp = require("express");
+const { CartModel } = require("../model/cartModel");
 const { ProductModel } = require("../model/productsModel");
 const productRouter = exp.Router()
 const cloud = require("cloudinary").v2
@@ -26,7 +27,6 @@ productRouter.post("/create",async(req,res)=>{
     const file = req.files.img;
     const allData = await ProductModel.find()
     // res.send(`${allData.length}`)
-
     cloud.uploader.upload(file.tempFilePath, async (err, result) => {
         try {
             if(allData.length>=0){
@@ -71,6 +71,7 @@ productRouter.delete("/delete/:product_id",async (req,res)=>{
     const id = req.params.product_id;
     try {
         const del =  await ProductModel.deleteOne({product_id:id})
+        await CartModel.deleteOne({product_id:id})
         res.send("Deleted")
         console.log(del);
     } catch (error) {
