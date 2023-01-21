@@ -19,7 +19,7 @@ cartRouter.get("/getCartData",async(req,res)=>{
             res.send("Something Went Wrong!!")
         }
     } catch (error) {
-        res.send("Kuch GadBhad")
+        res.send("Something Went Wrong!!")
     }
 })
 
@@ -39,7 +39,7 @@ cartRouter.post("/itemPostatCart/:product_id",async(req,res)=>{
             res.send("Product is not available")
         }
     } catch (error) {
-        res.send(error)
+        res.send("Something Went Wrong!!")
         console.log(error)
     }
 })
@@ -62,7 +62,7 @@ cartRouter.delete("/deleteItemfromCart/:product_id",async (req,res)=>{
             res.send("wrong input")
         }
     } catch (error) {
-        res.send(error)
+        res.send("Something Went Wrong!!")
         console.log(error)
     }
 })
