@@ -7,13 +7,20 @@ const { adminRouter } = require("./Router/adminRoute");
 const { validateAdmin } = require("./middleware/adminAuthenticate");
 const { userRouter } = require("./Router/usersRoute");
 const { cartRouter } = require("./Router/cartRouter");
+const cors = require("cors");
+const { homeRouter } = require("./Router/homepage");
+
 const app = exp();
+
+app.use(cors())
 
 app.use(exp.json());
 
 app.use(fileUpload({
     useTempFiles:true
 }))
+
+app.use("/home",homeRouter)
 
 app.use("/cart",cartRouter)
 app.use("/users",userRouter)
