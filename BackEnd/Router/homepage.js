@@ -8,7 +8,7 @@ homeRouter.get("/getProduct",async(req,res)=>{
         const data = await ProductModel.find();
         res.send(data)
     } catch (error) {
-        res.send("Something Went Wrong !!");
+        res.send("Something Went Wrong on homepage!!");
         console.log(error);
     }
 })

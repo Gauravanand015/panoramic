@@ -48,6 +48,8 @@ adminRouter.post("/login",async(req,res)=>{
         }
     } catch (error) {
         res.send("Somthing Went Wrong !!")
+        console.log(error);
+    
     }
 })
 

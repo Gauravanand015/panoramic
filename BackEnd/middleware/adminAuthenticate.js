@@ -12,7 +12,8 @@ const validateAdmin =  (req,res,next)=>{
             res.send("You Are Not Authorised !!")
         }
     } catch (error) {
-        res.send("Something Went Wrong !!")
+        res.send("Something Went Wrong in middleware !!")
+        console.log(error)
     }
 }
 

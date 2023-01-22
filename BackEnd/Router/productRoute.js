@@ -18,6 +18,7 @@ productRouter.get("/allData",async(req,res)=>{
         res.send(allData);
     } catch (error) {
         res.send(error)
+        console.log(error);
     }
 })
 
@@ -76,6 +77,7 @@ productRouter.delete("/delete/:product_id",async (req,res)=>{
         console.log(del);
     } catch (error) {
         res.send(error);
+        console.log(error);
     }
 })
 
