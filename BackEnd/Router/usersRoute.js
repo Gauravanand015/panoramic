@@ -24,7 +24,7 @@ userRouter.post("/register",async(req,res)=>{
             }
         })
     } catch (error) {
-        res.send("Kuch GADBAD")
+        res.send("Somthing Went Wrong while registering")
         console.log(error)
     }
 })
@@ -37,7 +37,7 @@ userRouter.post("/login_user", async(req,res)=>{
         if(find.length>0){
             bcrypt.compare(pass, find[0].pass, (err, result)=>{
                 if(err){
-                    res.send("email or password is not correct please try again")
+                    res.send({msg:"email or password is not correct please try again"})
                     console.log(err)
                 }else{
                     let token = jwt.sign({ userID: find[0]._id }, process.env.userSecretKey);
@@ -46,7 +46,8 @@ userRouter.post("/login_user", async(req,res)=>{
             });
         }
     } catch (error) {
-        res.send("Somthing Went Wrong !!")
+        res.send("Somthing Went Wrong while login !!")
+        console.log(error)
     }
 })
 
